@@ -1,8 +1,8 @@
-from pages.elements_page import TextBoxPage
+from pages.elements_page import TextBoxPage, CheckBoxPage
+
 
 class TestElements:
     class TestTextTexBox:
-
         def test_text_box(self, driver):
             link = 'https://demoqa.com/text-box'
             text_box_page = TextBoxPage(driver, link)
@@ -14,5 +14,15 @@ class TestElements:
             assert current_address == out_current_address
             assert permanent_address == out_permanent_address
 
+    class TestCheckBox:
+        def test_check_box(self, driver):
+            link = 'https://demoqa.com/checkbox'
+            check_box_page = CheckBoxPage(driver, link)
+            check_box_page.open()
+            check_box_page.open_full_list()
+            check_box_page.click_random_checkbox()
+            input_text = check_box_page.get_checked_items()
+            output_text = check_box_page.get_output_result()
+            assert input_text == output_text, 'checkbox is not selected, or does not match'
 
 
