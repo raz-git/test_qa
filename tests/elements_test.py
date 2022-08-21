@@ -1,4 +1,6 @@
-from pages.elements_page import TextBoxPage, CheckBoxPage
+import pytest
+
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
 
 
 class TestElements:
@@ -24,5 +26,14 @@ class TestElements:
             input_text = check_box_page.get_checked_items()
             output_text = check_box_page.get_output_result()
             assert input_text == output_text, 'checkbox is not selected, or does not match'
+
+    class TestRadioButton:
+        @pytest.mark.xfail()
+        def test_radio_button(self, driver):
+            link = 'https://demoqa.com/radio-button'
+            radio_button_page = RadioButtonPage(driver, link)
+            radio_button_page.open()
+            radio_button_page.click_radio_button_and_check_selected()
+
 
 
