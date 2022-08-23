@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 class BasePage:
@@ -31,3 +32,18 @@ class BasePage:
 
     def element_is_present(self, locator, timeout=5):
         return Wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+
+    def double_click(self, element):
+        action = ActionChains(self.driver)
+        action.double_click(element)
+        action.perform()
+
+    def right_click(self, element):
+        action = ActionChains(self.driver)
+        action.context_click(element)
+        action.perform()
+
+
+
+
+
