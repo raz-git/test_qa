@@ -43,6 +43,13 @@ class BasePage:
         action.context_click(element)
         action.perform()
 
+    def add_padding_to_body(self, px=100):
+        self.driver.execute_script(f"document.getElementsByClassName('body-height')[0].style= 'padding-bottom: {px}px';")
+
+    def delete_footer(self):
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+        self.driver.execute_script("document.getElementById('fixedban').remove();")
+
 
 
 

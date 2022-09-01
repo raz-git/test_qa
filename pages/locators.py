@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from random import randint
 
 class ElementsPageLocators():
 
@@ -63,3 +64,60 @@ class ButtonPageLocators():
 class LinkPageLocators():
     SIMPLE_LINK = (By.CSS_SELECTOR, 'a[id="simpleLink"]')
     BAD_REQUEST = (By.CSS_SELECTOR, 'p[id="bad-request"]')
+
+class DynamicPageLocators():
+    ENABLE_AFTER_FIVE_SEC = (By.CSS_SELECTOR, 'button[id="enableAfter"]')
+    COLOR_CHANGE = (By.CSS_SELECTOR, 'button[id="colorChange"]')
+    VISIBLE_AFTER_FIVE_SEC = (By.CSS_SELECTOR, 'button[id="visibleAfter"]')
+
+
+class PracticeFormLocators:
+    #required fields
+    INPUT_NAME = (By.CSS_SELECTOR, 'input[id="firstName"')
+    INPUT_LAST_NAME = (By.CSS_SELECTOR, 'input[id="lastName"')
+    INPUT_EMAIL = (By.CSS_SELECTOR, 'input[id="userEmail"')
+    INPUT_GENDER = (By.CSS_SELECTOR, f'label[for="gender-radio-{randint(1,3)}"]')
+    INPUT_MOBILE_NUMBER = (By.CSS_SELECTOR, 'input[id="userNumber"')
+    SUBMIT = (By.CSS_SELECTOR, 'button[id="submit"')
+    OUTPUT_TABLE = (By.CSS_SELECTOR, 'tbody td:nth-child(2n)')
+
+class BrowserAlertsLocators:
+    #alert button
+    CLICK_AFTER_FIVE_SEC = (By.CSS_SELECTOR, 'button[id="timerAlertButton"]')
+    CLICK_ALERT_CONFIRM = (By.CSS_SELECTOR, 'button[id="confirmButton"]')
+    CLICK_ALERT_PROMPT = (By.CSS_SELECTOR, 'button[id="promtButton"]')
+
+    RESULT_CONFIRM = (By.CSS_SELECTOR, 'span[id="confirmResult"]')
+    RESULT_PROMPT = (By.CSS_SELECTOR, 'span[id="promptResult"]')
+
+class FramePageLocators:
+    FIRST_FRAME = (By.CSS_SELECTOR, 'iframe[id="frame1"]')
+    SECOND_FRAME = (By.CSS_SELECTOR, 'iframe[id="frame2"]')
+    TITLE_FRAME = (By.CSS_SELECTOR, 'h1[id="sampleHeading"]')
+
+class  NestedFramePageLocators:
+    PARENT_FRAME = (By.CSS_SELECTOR, 'iframe[id="frame1"]')
+    PARENT_TEXT = (By.CSS_SELECTOR, 'body')
+    CHILD_FRAME = (By.CSS_SELECTOR, 'iframe[srcdoc="<p>Child Iframe</p>"]')
+    CHILD_TEXT = (By.CSS_SELECTOR, 'p')
+
+class ModalDialogPageLocators:
+    SMALL_MODAL_OPEN = (By.CSS_SELECTOR, 'button[id="showSmallModal"]')
+    SMALL_MODAL_CLOSE = (By.CSS_SELECTOR, 'button[id="closeSmallModal"]')
+    SMALL_BODY_TEXT = (By.CSS_SELECTOR, 'div[class="modal-body"]')
+    SMALL_TITLE_TEXT = (By.CSS_SELECTOR, 'div[id="example-modal-sizes-title-sm"]')
+
+    LARGE_MODAL_OPEN = (By.CSS_SELECTOR, 'button[id="showLargeModal"]')
+    LARGE_MODAL_CLOSE = (By.CSS_SELECTOR, 'button[id="closeLargeModal"]')
+    LARGE_BODY_TEXT = (By.CSS_SELECTOR, '.modal-body p')
+    LARGE_TITLE_TEXT = (By.CSS_SELECTOR, 'div[id="example-modal-sizes-title-lg"]')
+
+class AccordianPageLocators:
+    SECTION_1 = (By.CSS_SELECTOR, 'div[id="section1Heading"]')
+    SECTION_CONTENT_1 = (By.CSS_SELECTOR, '#section1Content p')
+    SECTION_2 = (By.CSS_SELECTOR, 'div[id="section2Heading"]')
+    SECTION_CONTENT_2 = (By.CSS_SELECTOR, '#section2Content p')
+    SECTION_3 = (By.CSS_SELECTOR, 'div[id="section3Heading"]')
+    SECTION_CONTENT_3 = (By.CSS_SELECTOR, '#section3Content p')
+
+

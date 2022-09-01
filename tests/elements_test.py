@@ -3,7 +3,8 @@ import time
 import pytest
 from random import randint
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage, LinksPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage, LinksPage, \
+    DynamicPage
 
 
 class TestElements:
@@ -106,6 +107,32 @@ class TestElements:
             link_page.open()
             response = link_page.check_broken_link('https://demoqa.com/bad-request')
             assert response == 400
+
+    class TestDynamicPropertiestPage:
+        def test_dynamic_properties(self, driver):
+            link = 'https://demoqa.com/dynamic-properties'
+            dynamic_page = DynamicPage(driver, link)
+            dynamic_page.open()
+            color_before, color_after = dynamic_page.check_chenged_color()
+            assert color_before != color_after
+
+        def test_check_appear_button(self, driver):
+            link = 'https://demoqa.com/dynamic-properties'
+            dynamic_page = DynamicPage(driver, link)
+            dynamic_page.open()
+            appear = dynamic_page.check_appear_of_button()
+            assert appear is True, 'after 5 sec the button is still invisible'
+
+        def test_enable_button(self, driver):
+            link = 'https://demoqa.com/dynamic-properties'
+            dynamic_page = DynamicPage(driver, link)
+            dynamic_page.open()
+            enable = dynamic_page.enable_after_five_sec()
+            assert enable is True, 'the button is still inactive'
+
+
+
+
 
 
 

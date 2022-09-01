@@ -1,10 +1,12 @@
+import time
 from random import randint
 
 import requests
+from selenium.common import TimeoutException
 from selenium.webdriver.support.ui import Select
 from generator.generator import generated_person
 from pages.locators import ElementsPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, WebTablePageLocators, \
-    ButtonPageLocators, LinkPageLocators
+    ButtonPageLocators, LinkPageLocators, DynamicPageLocators
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 
@@ -187,3 +189,28 @@ class LinksPage(BasePage):
             self.element_is_present(self.locators.BAD_REQUEST).click()
         else:
             return request.status_code
+
+class DynamicPage(BasePage):
+    locators = DynamicPageLocators
+
+    def check_chenged_color(self):
+        color_button = self.element_is_present(self.locators.COLOR_CHANGE)
+        color_button_before = color_button.value_of_css_property('color')
+        time.sleep(5)
+        color_button_after = color_button.value_of_css_property('color')
+        return color_button_before, color_button_after
+
+    def check_appear_of_button(self):
+        try:
+            self.element_is_visible(self.locators.VISIBLE_AFTER_FIVE_SEC)
+        except TimeoutException:
+            return False
+        return True
+
+    def enable_after_five_sec(self):
+        try:
+            status = self.element_is_clicable(self.locators.ENABLE_AFTER_FIVE_SEC)
+            status.click()
+        except TimeoutException:
+            return False
+        return True

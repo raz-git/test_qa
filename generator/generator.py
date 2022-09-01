@@ -16,4 +16,5 @@ def generated_person():
         age=randint(10, 90),
         department=faker_ru.job(),
         salary=randint(2000, 20000),
+        mobile=faker_ru.msisdn(),
     )

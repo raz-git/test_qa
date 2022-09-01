@@ -12,4 +12,5 @@ class Person:
     lastname : str = None
     salary : int = None
     department : str = None
+    mobile : str = None
 
