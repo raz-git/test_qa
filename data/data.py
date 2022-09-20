@@ -14,3 +14,7 @@ class Person:
     department : str = None
     mobile : str = None
 
+@dataclass
+class Color:
+    color_name: list = None
+

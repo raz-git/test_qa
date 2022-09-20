@@ -1,4 +1,4 @@
-from data.data import Person
+from data.data import Person, Color
 from faker import Faker
 from random import randint
 
@@ -17,4 +17,9 @@ def generated_person():
         department=faker_ru.job(),
         salary=randint(2000, 20000),
         mobile=faker_ru.msisdn(),
+    )
+
+def generated_color():
+    yield  Color(
+        color_name=["red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
     )

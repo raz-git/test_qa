@@ -1,20 +1,47 @@
 import time
-
-from pages.base_page import BasePage
-from pages.locators import AccordianPageLocators
+from pages.widgets_page import AccordianPage, AutoCompletePage
 
 
-class AccordianPage(BasePage):
-    locators = AccordianPageLocators
+class TestWidgets:
+    class TestWidgetsAccordian:
+        def test_widgets_accordioan(self, driver):
+            link = 'https://demoqa.com/accordian'
+            accordian_page = AccordianPage(driver, link)
+            accordian_page.open()
+            accordian_page.check_accordion()
 
-    def check_accordion(self):
-        first = self.element_is_present(self.locators.SECTION_CONTENT_1).text
-        self.element_is_present(self.locators.SECTION_2).click()
-        second = self.element_is_present(self.locators.SECTION_CONTENT_2).text
-        find = self.element_is_visible(self.locators.SECTION_3)
-        self.go_to_element(find)
-        find.click()
-        thirt = self.element_is_present(self.locators.SECTION_CONTENT_3).text
-        assert 'Lorem Ipsum is simply dummy text of the printing and' in first
-        assert 'Contrary to popular belief, Lorem Ipsum is not simply random text' in second
-        assert 'It is a long established fact that a reader will be' in thirt
+    class TestAutoComplete:
+        def test_fill_multiple_color_names(self, driver):
+            link = 'https://demoqa.com/auto-complete'
+            auto_complite_page = AutoCompletePage(driver, link)
+            auto_complite_page.open()
+            colors = auto_complite_page.fill_input_multi()
+            colors_result = auto_complite_page.check_input_in_multi()
+            assert  colors == colors_result
+
+        def test_remove_value_from_multiple_color_names(self, driver):
+            link = 'https://demoqa.com/auto-complete'
+            auto_complite_page = AutoCompletePage(driver, link)
+            auto_complite_page.open()
+            auto_complite_page.fill_input_multi()
+            color_before, color_after = auto_complite_page.remove_element_from_multi()
+            assert color_before != color_after, 'added colors missing in the input'
+
+        def test_remove_all_values_from_ulti_color_names(self, driver):
+            link = 'https://demoqa.com/auto-complete'
+            auto_complite_page = AutoCompletePage(driver, link)
+            auto_complite_page.open()
+            auto_complite_page.fill_input_multi()
+            time.sleep(0.5)
+            color_before, color_after = auto_complite_page.remove_all_elements_from_multi()
+            assert color_before != len(color_after) and len(color_after) == 1, 'value was not deleted'
+
+        def test_single_color_name(self, driver):
+            link = 'https://demoqa.com/auto-complete'
+            auto_complite_page = AutoCompletePage(driver, link)
+            auto_complite_page.open()
+            color = auto_complite_page.fill_input_single()
+            color_result = auto_complite_page.check_color_in_single()
+            assert color == color_result, 'added colors missing in the input'
+
+
