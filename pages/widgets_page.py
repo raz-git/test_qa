@@ -1,10 +1,12 @@
 import random
 import time
+from datetime import date
+
 
 from generator.generator import generated_color
 from pages.base_page import BasePage
-from pages.locators import AccordianPageLocators, AutoCompletePageLocators
-
+from pages.locators import AccordianPageLocators, AutoCompletePageLocators, SliderPageLocators, ProgressBarPageLocators, \
+    TabsPageLocators
 from selenium.webdriver.common.keys import Keys
 
 
@@ -69,3 +71,52 @@ class AutoCompletePage(BasePage):
     def check_color_in_single(self):
         color = self.element_is_visible(self.locators.SINGLE_CONTAINER)
         return color.text
+
+
+class SliderPage(BasePage):
+    locators = SliderPageLocators
+
+    def change_slider_value(self):
+        value_before = self.element_is_visible(self.locators.VALUE_SLIDER).get_attribute('value')
+        slider_input = self.element_is_visible(self.locators.INPUT_SLIDER)
+        self.action_drag_and_drop_by_offset(slider_input, random.randint(1, 100), 0)
+        value_after = self.element_is_visible(self.locators.VALUE_SLIDER).get_attribute('value')
+        return value_before, value_after
+
+
+class ProgressBarPage(BasePage):
+    locators = ProgressBarPageLocators
+
+    def chage_progress_bar_value(self):
+        value_before = self.element_is_present(self.locators.VALUE).text
+        button = self.element_is_clicable(self.locators.BUTTON)
+        button.click()
+        time.sleep(random.randint(1, 3))
+        button.click()
+        value_after = self.element_is_visible(self.locators.VALUE).text
+        return value_before, value_after
+
+
+class TabsPage(BasePage):
+    locators = TabsPageLocators
+
+    def check_tabs(self, name_tab):
+        tabs = {'what':
+                    {'title':self.locators.TITLE_WHAT,
+                     'content': self.locators.CONTENT_WHAT},
+                'origin':
+                    {'title': self.locators.TITLE_ORIGIN,
+                     'content': self.locators.CONTENT_ORIGIN},
+                'use':
+                    {'title':self.locators.TITLE_USE,
+                     'content': self.locators.CONTENT_USE},
+                'more':
+                    {'title': self.locators.TITLE_MORE,
+                     'content': self.locators.CONTENT_MORE},
+        }
+
+        button = self.element_is_visible(tabs[name_tab]['title'])
+        button.click()
+        text_what = self.element_is_visible(tabs[name_tab]['content']).text
+        return button.text, len(text_what)
+

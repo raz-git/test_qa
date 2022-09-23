@@ -1,6 +1,8 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
+
 class BasePage:
     def __init__(self, driver, url):
         self.driver = driver
@@ -50,6 +52,14 @@ class BasePage:
         self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
         self.driver.execute_script("document.getElementById('fixedban').remove();")
 
+    def select_date_by_text(self, element, value):
+        select = Select(self.element_is_present(element))
+        select.select_by_visible_text(value)
+
+    def action_drag_and_drop_by_offset(self, element, x, y):
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(element, x, y)
+        action.perform()
 
 
 

@@ -128,3 +128,24 @@ class AutoCompletePageLocators:
     SINGLE_CONTAINER = (By.CSS_SELECTOR, 'div[class="auto-complete__single-value css-1uccc91-singleValue"]')
     SINGLE_INPUT = (By.CSS_SELECTOR, 'input[id="autoCompleteSingleInput"]')
 
+
+class SliderPageLocators:
+    INPUT_SLIDER = (By.CSS_SELECTOR, 'input[class="range-slider range-slider--primary"]')
+    VALUE_SLIDER = (By.CSS_SELECTOR, 'input[id="sliderValue"]')
+
+
+class ProgressBarPageLocators:
+    BUTTON = (By.CSS_SELECTOR, 'button[id="startStopButton"]')
+    VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
+
+
+class TabsPageLocators:
+    TITLE_WHAT = (By.CSS_SELECTOR, 'a[id="demo-tab-what"]')
+    TITLE_ORIGIN = (By.CSS_SELECTOR, 'a[id="demo-tab-origin"]')
+    TITLE_USE = (By.CSS_SELECTOR, 'a[id="demo-tab-use"]')
+    TITLE_MORE = (By.CSS_SELECTOR, 'a[id="demo-tab-more"]')
+    CONTENT_WHAT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-what"]')
+    CONTENT_ORIGIN = (By.CSS_SELECTOR, 'div[id="demo-tabpane-origin"]')
+    CONTENT_USE = (By.CSS_SELECTOR, 'div[id="demo-tabpane-use"]')
+    CONTENT_MORE = (By.CSS_SELECTOR, 'div[id="demo-tabpane-more"]')
+
